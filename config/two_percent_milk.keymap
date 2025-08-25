@@ -10,14 +10,34 @@
 #include <dt-bindings/zmk/pointing.h>
 
 
+
 / {
     keymap {
         compatible = "zmk,keymap";
 
+        mouse_emulation {
+            compatible = "zmk,behavior-mouse-emulation";
+            label = "MOUSE_EMULATION_0";
+            // Link this to the PMW3360 node you created in the .overlay
+            sensor = <&pmw3360>;
+        };
+
         default_layer {
             bindings = <
-                &kp X
-                &kp Z
+                // Left key: Tap for "A", hold to activate mouse
+                &mt A &mo 1
+                // Right key: Tap for "B", hold to activate mouse
+                &mt B &mo 1
+            >;
+        };
+
+        // This is a new layer for mouse control
+        layer_1 {
+            bindings = <
+                // Left key: Left click
+                &cp LEFT_CLICK
+                // Right key: Right click
+                &cp RIGHT_CLICK
             >;
         };
     };
