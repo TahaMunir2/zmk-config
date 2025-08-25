@@ -1,19 +1,9 @@
-// This file is used to customize the nice!nano v2 for the two_percent_milk keyboard.
+// This file extends the two_percent_milk shield definition.
 
-&kscan0 {
-    compatible = "zmk,kscan-gpio-matrix";
-    label = "KSCAN";
-    diode-direction = "col2row";
-
-    col-gpios
-        = <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-        , <&pro_micro 17 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-        ;
-
-    row-gpios
-        = <&pro_micro 14 GPIO_ACTIVE_HIGH>
-        , <&pro_micro 15 GPIO_ACTIVE_HIGH>
-        ;
+/ {
+    chosen {
+        zmk,kscan = &kscan0;
+    };
 };
 
 // Add the PMW3360 sensor to your configuration
@@ -30,11 +20,5 @@
         // Change these pin numbers to match your wiring on the nice!nano v2
         cs-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>; // D4
         motion-gpios = <&pro_micro 12 GPIO_ACTIVE_HIGH>; // D5
-    };
-};
-
-/ {
-    chosen {
-        zmk,kscan = &kscan0;
     };
 };
