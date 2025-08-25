@@ -1,15 +1,7 @@
-/*
- * Copyright (c) 2022 The ZMK Contributors
- *
- * SPDX-License-Identifier: MIT
- */
-
-#include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/pointing.h>
-
-
+#include <dt-bindings/zmk/hid_usage.h>
+#include <dt-bindings/zmk/hid_usage_pages.h>
+#include <dt-bindings/zmk/mouse.h>
 
 / {
     keymap {
@@ -18,26 +10,26 @@
         mouse_emulation {
             compatible = "zmk,behavior-mouse-emulation";
             label = "MOUSE_EMULATION_0";
-            // Link this to the PMW3360 node you created in the .overlay
+            // Link this behavior to the PMW3360 node from your .overlay
             sensor = <&pmw3360>;
         };
 
         default_layer {
             bindings = <
-                // Left key: Tap for "A", hold to activate mouse
-                &mt A &mo 1
-                // Right key: Tap for "B", hold to activate mouse
-                &mt B &mo 1
+                // Left key: Left click on tap, and switches to mouse layer on hold
+                &mt LCLK 1 
+                // Right key: Right click on tap, and switches to mouse layer on hold
+                &mt RCLK 1
             >;
         };
 
-        // This is a new layer for mouse control
+        // This is the new mouse layer
         layer_1 {
             bindings = <
-                // Left key: Left click
-                &cp LEFT_CLICK
-                // Right key: Right click
-                &cp RIGHT_CLICK
+                // Left key: Left click on tap
+                &mp MOVE_X
+                // Right key: Right click on tap
+                &mp MOVE_Y
             >;
         };
     };
