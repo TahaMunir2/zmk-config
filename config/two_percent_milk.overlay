@@ -1,11 +1,5 @@
 // This file is used to customize the nice!nano v2 for the two_percent_milk keyboard.
 
-/ {
-    chosen {
-        zmk,kscan = &kscan0;
-    };
-};
-
 &kscan0 {
     compatible = "zmk,kscan-gpio-matrix";
     label = "KSCAN";
@@ -36,5 +30,11 @@
         // Change these pin numbers to match your wiring on the nice!nano v2
         cs-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>; // D4
         motion-gpios = <&pro_micro 12 GPIO_ACTIVE_HIGH>; // D5
+    };
+};
+
+/ {
+    chosen {
+        zmk,kscan = &kscan0;
     };
 };
